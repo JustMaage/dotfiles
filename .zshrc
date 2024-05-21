@@ -3,9 +3,9 @@
 # Zoxide install script
 #curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
-# fzf (https://github.com/Aloxaf/fzf-tab)
+# fzf (https://github.com/junegunn/fzf)
 # can be installed with
-#sudo apt-get install fzf
+#git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 # Fixes errors when insatlling zoxide with the install script
 export PATH="$PATH:$HOME/.local/bin"
@@ -85,3 +85,5 @@ alias cd="z"
 
 # Shell integrations
 eval "$(zoxide init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
