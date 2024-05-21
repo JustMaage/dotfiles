@@ -77,6 +77,7 @@ setopt hist_find_no_dups
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls="ls --color"
