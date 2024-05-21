@@ -3,6 +3,10 @@
 # Zoxide install script
 #curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
+# fzf (https://github.com/Aloxaf/fzf-tab)
+# can be installed with
+#sudo apt-get install fzf
+
 # Fixes errors when insatlling zoxide with the install script
 export PATH="$PATH:$HOME/.local/bin"
 
@@ -32,6 +36,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZP::git
