@@ -1,3 +1,5 @@
+# The font I use is contained in this repository
+
 # Zoxide install script
 #curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
@@ -45,7 +47,6 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-#https://github.com/ryanoasis/nerd-fonts/blob/v3.0.0/patched-fonts/JetBrainsMono/NoLigatures/Regular/JetBrainsMonoNLNerdFontMono-Regular.ttf
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
