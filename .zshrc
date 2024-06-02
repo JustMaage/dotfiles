@@ -1,12 +1,5 @@
 # The font I use is contained in this repository
 
-# Zoxide install script
-#curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-
-# fzf (https://github.com/junegunn/fzf)
-# can be installed with
-#git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
-
 # Fixes errors when insatlling zoxide with the install script
 export PATH="$PATH:$HOME/.local/bin"
 
