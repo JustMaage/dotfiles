@@ -1,0 +1,2 @@
+# Fixes line encodings on linux
+* text=auto eol=lf
