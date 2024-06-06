@@ -50,6 +50,8 @@ bindkey '^[w' kill-region
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^H' backward-kill-word
+bindkey "${terminfo[kcuu1]}" history-search-backward # Up Arrow
+bindkey "${terminfo[kcud1]}" history-search-forward # Down Arrow
 
 # History
 HISTSIZE=5000
