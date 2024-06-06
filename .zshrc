@@ -52,6 +52,7 @@ bindkey '^[[1;5D' backward-word
 bindkey '^H' backward-kill-word
 bindkey "${terminfo[kcuu1]}" history-search-backward # Up Arrow
 bindkey "${terminfo[kcud1]}" history-search-forward # Down Arrow
+bindkey '5~' kill-word
 
 # History
 HISTSIZE=5000
@@ -80,3 +81,4 @@ alias cd="z"
 eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
