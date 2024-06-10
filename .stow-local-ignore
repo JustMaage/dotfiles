@@ -26,3 +26,4 @@ _darcs
 # for custom files that are not needed
 .*\.ttf
 .*\.sh
+.*\.ps1
