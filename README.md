@@ -1,22 +1,6 @@
 # My dotfiles
 
-This directory contains the dotfiles for my system
-
-## Requirements
-
-Ensure you have the following installed on your system
-
-### Git
-
-```
-sudo apt-get install git
-```
-
-### Stow
-
-```
-sudo apt-get install stow
-```
+This directory contains the dotfiles for my system. The Windows installation script has limited features.
 
 ## Installation
 
@@ -27,8 +11,12 @@ git clone https://github.com/JustMaage/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
-then use GNU stow to create symlinks
+then run the install script for your system:
 
-```
-stow .
-```
+### Windows:
+`.\install.ps1`
+
+Make sure that you run the terminal as administrator.
+
+### Linux:
+`sudo ./install.sh`
