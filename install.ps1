@@ -69,8 +69,7 @@ Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 Import-Module PSFzf
 
 # Override PSReadLine's history search
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' `
-                -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 # Override default tab completion
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
