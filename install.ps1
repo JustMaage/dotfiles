@@ -6,14 +6,14 @@ function Test-Administrator {
 
 # Function to check if Chocolatey is installed
 function Test-ChocolateyInstalled {
-    return (Get-Command choco -ErrorAction SilentlyContinue) -ne $null
+    return $null -ne (Get-Command choco -ErrorAction SilentlyContinue)
 }
 
 # Function to install Chocolatey
 function Install-Chocolatey {
     Set-ExecutionPolicy Bypass -Scope Process -Force
     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 }
 
 # Function to install packages using Chocolatey
@@ -22,8 +22,10 @@ function Install-Packages {
 }
 
 # Function to refresh environment variables
-function Refresh-EnvironmentVariables {
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+function Update-EnvironmentVariables {
+    $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
+    Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+    refreshenv
 }
 
 # Function to copy zen.toml file
@@ -101,7 +103,7 @@ if (-not (Test-ChocolateyInstalled)) {
 Install-Packages
 
 # Refresh environment variables
-Refresh-EnvironmentVariables
+Update-EnvironmentVariables
 
 # Copy zen.toml file
 Copy-ZenToml
