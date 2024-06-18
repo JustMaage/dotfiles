@@ -6,6 +6,12 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+if [ "$SUDO_USER" ]; then
+  USER_HOME=$(eval echo ~$SUDO_USER)
+else
+  USER_HOME=$HOME
+fi
+
 # Function to install packages
 install_packages() {
     local packages=("$@")
@@ -51,7 +57,7 @@ echo "Installing packages..."
 install_packages curl git stow zsh
 
 echo "Linking dotfiles using stow..."
-if ! cd /home/$SUDO_USER/dotfiles; then
+if ! cd $USER_HOME/dotfiles; then
     echo "Error: Unable to change directory to dotfiles directory."
     exit 1
 fi
@@ -67,12 +73,12 @@ if ! sudo -u $SUDO_USER curl -sSfL https://raw.githubusercontent.com/ajeetdsouza
 fi
 
 echo "Cloning fzf repository..."
-if ! git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /home/$SUDO_USER/.fzf >/dev/null 2>&1; then
+if ! git clone --quiet --depth 1 https://github.com/junegunn/fzf.git $USER_HOME/.fzf >/dev/null 2>&1; then
     echo "Error: Failed to clone fzf repository."
 fi
 
 echo "Installing fzf..."
-if ! yes | /home/$SUDO_USER/.fzf/install >/dev/null 2>&1; then
+if ! yes | $USER_HOME/.fzf/install >/dev/null 2>&1; then
     echo "Error: Failed to install fzf."
 fi
 
