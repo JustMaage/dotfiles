@@ -1,15 +1,18 @@
 #!/bin/bash
 
-# Check if the user is root
+# Check if the script is run as root
 if [ "$EUID" -ne 0 ]; then
   echo "This script needs to be run with sudo"
   exit 1
 fi
 
-if [ "$SUDO_USER" ]; then
+# Determine the home directory of the user who invoked sudo, or root if run directly
+if [ -n "$SUDO_USER" ]; then
   USER_HOME=$(eval echo ~$SUDO_USER)
+  RUN_AS_USER="$SUDO_USER"
 else
-  USER_HOME=$HOME
+  USER_HOME="$HOME"
+  RUN_AS_USER="root"
 fi
 
 # Function to install packages
@@ -57,7 +60,7 @@ echo "Installing packages..."
 install_packages curl git stow zsh
 
 echo "Linking dotfiles using stow..."
-if ! cd $USER_HOME/dotfiles; then
+if ! cd "$USER_HOME/dotfiles"; then
     echo "Error: Unable to change directory to dotfiles directory."
     exit 1
 fi
@@ -66,19 +69,24 @@ if ! stow . >/dev/null 2>&1; then
     echo "Error: Failed to link dotfiles using stow."
 fi
 
-
 echo "Installing and setting up zoxide..."
-if ! sudo -u $SUDO_USER curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sudo -u $SUDO_USER sh >/dev/null; then
-    echo "Error: Failed to install zoxide."
+if [ "$RUN_AS_USER" != "root" ]; then
+    if ! sudo -u "$RUN_AS_USER" curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sudo -u "$RUN_AS_USER" sh >/dev/null; then
+        echo "Error: Failed to install zoxide."
+    fi
+else
+    if ! curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh >/dev/null; then
+        echo "Error: Failed to install zoxide."
+    fi
 fi
 
 echo "Cloning fzf repository..."
-if ! git clone --quiet --depth 1 https://github.com/junegunn/fzf.git $USER_HOME/.fzf >/dev/null 2>&1; then
+if ! git clone --quiet --depth 1 https://github.com/junegunn/fzf.git "$USER_HOME/.fzf" >/dev/null 2>&1; then
     echo "Error: Failed to clone fzf repository."
 fi
 
 echo "Installing fzf..."
-if ! yes | $USER_HOME/.fzf/install >/dev/null 2>&1; then
+if ! yes | "$USER_HOME/.fzf/install" >/dev/null 2>&1; then
     echo "Error: Failed to install fzf."
 fi
 
@@ -93,8 +101,8 @@ if ! sudo chmod +x /usr/local/bin/oh-my-posh; then
 fi
 
 echo "Changing default shell..."
-if ! chsh -s $(which zsh) $SUDO_USER >/dev/null; then
+if ! chsh -s $(which zsh) "$RUN_AS_USER" >/dev/null; then
     echo "Error: Failed to change default shell."
 fi
 
-echo "Finished. Restart your terminal for these changes to take effect. NOTE: You will need to change your font to a nerdfont (like the one given) to make everything work"
+echo "Finished. Restart your terminal for these changes to take effect. NOTE: You will need to change your font to a nerdfont (like the one given) to make everything work."
