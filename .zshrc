@@ -67,6 +67,9 @@ alias ls="ls --color"
 alias ll="ls -la"
 alias cd="z"
 
+# Custom aliases
+source $HOME/.aliases
+
 # Shell integrations
 eval "$(zoxide init zsh)"
 
