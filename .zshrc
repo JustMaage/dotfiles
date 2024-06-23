@@ -68,7 +68,9 @@ alias ll="ls -la"
 alias cd="z"
 
 # Custom aliases
-source $HOME/.aliases
+if [ -f $HOME/.aliases ]; then
+  source $HOME/.aliases
+fi
 
 # Shell integrations
 eval "$(zoxide init zsh)"
