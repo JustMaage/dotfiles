@@ -25,7 +25,6 @@ zinit light joshskidmore/zsh-fzf-history-search
 # Add in snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::ubuntu
 zinit snippet OMZP::command-not-found
 
 # Load completions
@@ -67,9 +66,9 @@ alias ls="ls --color"
 alias ll="ls -la"
 alias cd="z"
 
-# Custom aliases
-if [ -f $HOME/.aliases ]; then
-  source $HOME/.aliases
+# Custom additions
+if [ -f $HOME/.extras.zsh ]; then
+  source $HOME/.extras.zsh
 fi
 
 # Shell integrations

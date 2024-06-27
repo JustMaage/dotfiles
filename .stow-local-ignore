@@ -27,3 +27,4 @@ _darcs
 .*\.ttf
 .*\.sh
 .*\.ps1
+.extras-example.zsh
