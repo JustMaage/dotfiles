@@ -86,9 +86,16 @@ else
     fi
 fi
 
-echo "Cloning fzf repository..."
-if ! git clone --quiet --depth 1 https://github.com/junegunn/fzf.git "$USER_HOME/.fzf" >/dev/null 2>&1; then
-    error "Failed to clone fzf repository."
+if [ ! -d "$USER_HOME/.fzf" ]; then
+    echo "Cloning fzf repository..."
+    if ! git clone --quiet --depth 1 https://github.com/junegunn/fzf.git "$USER_HOME/.fzf" >/dev/null 2>&1; then
+        error "Failed to clone fzf repository."
+    fi
+else
+    echo "Pulling changes from fzf repository..."
+    if ! (cd "$USER_HOME/.fzf" && git pull) >/dev/null 2>&1; then
+        error "Could not pull changes from repository."
+    fi
 fi
 
 echo "Installing fzf..."
@@ -113,4 +120,4 @@ fi
 
 echo "Finished. Restart your terminal for these changes to take effect."
 echo "NOTE: You will need to change your font to a nerdfont (like the one given) to make everything work."
-echo "Put your custom aliases in $USER_HOME/.aliases"
+echo "Put your custom aliases/commands in $USER_HOME/.extras.zsh"
