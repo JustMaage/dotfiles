@@ -19,6 +19,7 @@ function Install-Chocolatey {
 # Function to install packages using Chocolatey
 function Install-Packages {
     choco install -y zoxide oh-my-posh fzf
+    choco upgrade -y zoxide oh-my-posh fzf
 }
 
 # Function to refresh environment variables
