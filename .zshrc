@@ -9,7 +9,7 @@ PLUGIN_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/antidote/antidote.git"
 # Download the plugin manager if it's not there yet
 if [ ! -d "$PLUGIN_HOME" ]; then
    mkdir -p "$(dirname $PLUGIN_HOME)"
-   git clone git clone --depth=1 https://github.com/mattmc3/antidote.git "$PLUGIN_HOME"
+   git clone --depth=1 https://github.com/mattmc3/antidote.git "$PLUGIN_HOME"
 fi
 
 # Source/Load the plugin manager
