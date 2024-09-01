@@ -123,3 +123,5 @@ Install-PSFzfModule
 Update-Profile
 
 Write-Output "Script completed successfully."
+
+Write-Output "To use the catppuccin theme, follow this guide: https://github.com/catppuccin/windows-terminal"
