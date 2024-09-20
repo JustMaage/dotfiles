@@ -108,6 +108,18 @@ if ! sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/down
     error "Failed to install ohmyposh."
 fi
 
+if [ ! -d "$USER_HOME/.tmux/plugins/tpm" ]; then
+    echo "Cloning tmux plugin manager repository..."
+    if ! git clone https://github.com/tmux-plugins/tpm "$USER_HOME/.tmux/plugins/tpm" >/dev/null 2>&1; then
+        error "Failed to clone tmux plugin manager repository."
+    fi
+else
+    echo "Pulling changes from tmux plugin manager repository..."
+    if ! (cd "$USER_HOME/.tmux/plugins/tpm" && git pull) >/dev/null 2>&1; then
+        error "Could not pull changes from repository."
+    fi
+fi
+
 echo "Changing permission for ohmyposh executable..."
 if ! sudo chmod +x /usr/local/bin/oh-my-posh; then
     error "Failed to change permission for ohmyposh."
