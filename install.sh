@@ -125,6 +125,11 @@ if ! sudo chmod +x /usr/local/bin/oh-my-posh; then
     error "Failed to change permission for ohmyposh."
 fi
 
+echo "Changing home directory user permissions..."
+if ! chown -R $RUN_AS_USER:$RUN_AS_USER $USER_HOME; then
+    error "Failed to change directory user permissions."
+fi
+
 echo "Changing default shell..."
 if ! chsh -s $(which zsh) "$RUN_AS_USER" >/dev/null; then
     error "Failed to change default shell."
