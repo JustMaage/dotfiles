@@ -29,5 +29,5 @@ set backspace=indent,eol,start	" Backspace behaviour
 
 set nospell " disables red highlighting
 set termguicolors " allows the catpuccin theme
-colorscheme catppuccin_mocha
+colorscheme tokyonight
 set mouse=a
